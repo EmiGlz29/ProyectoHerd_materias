@@ -35,20 +35,37 @@
                 </div>
             @else
                 <div class="overflow-x-auto">
-                    <table class="w-full min-w-[600px] text-left text-sm">
+                    <table class="w-full min-w-[800px] text-left text-sm">
                         <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-600">
                             <tr>
+                                <th scope="col" class="px-6 py-4 font-semibold">ID</th>
                                 <th scope="col" class="px-6 py-4 font-semibold">Nombre</th>
                                 <th scope="col" class="px-6 py-4 font-semibold">Código</th>
                                 <th scope="col" class="px-6 py-4 text-right font-semibold">Créditos</th>
+                                <th scope="col" class="px-6 py-4 text-right font-semibold">Acciones</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-200">
                             @foreach ($materias as $materia)
                                 <tr class="hover:bg-slate-50">
+                                    <td class="px-6 py-4 text-slate-600">{{ $materia->id }}</td>
                                     <td class="px-6 py-4 font-medium text-slate-900">{{ $materia->nombre }}</td>
                                     <td class="px-6 py-4 text-slate-600">{{ $materia->codigo }}</td>
                                     <td class="px-6 py-4 text-right text-slate-600">{{ $materia->creditos }}</td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex justify-end gap-3">
+                                            <a href="{{ route('materia.edit', $materia) }}" class="font-medium text-blue-700 hover:text-blue-900">
+                                                Editar
+                                            </a>
+                                            <form action="{{ route('materia.destroy', $materia) }}" method="POST" onsubmit="return confirm('¿Eliminar esta materia?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="font-medium text-red-700 hover:text-red-900">
+                                                    Eliminar
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
