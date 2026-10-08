@@ -47,9 +47,10 @@ class MateriaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Materia $materia)
+    public function show()
     {
-        //
+        $materias = Materia::query()->get(['nombre', 'codigo']);
+        return view('materia.show', compact('materias'));
     }
 
     /**
@@ -57,7 +58,7 @@ class MateriaController extends Controller
      */
     public function edit(Materia $materia)
     {
-        //
+        
     }
 
     /**
