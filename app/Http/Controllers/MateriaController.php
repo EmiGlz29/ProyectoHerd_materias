@@ -12,7 +12,8 @@ class MateriaController extends Controller
      */
     public function index()
     {
-        //
+        $materias = Materia::all();
+        return view('materia.index', compact('materias'));
     }
 
     /**
@@ -20,7 +21,7 @@ class MateriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('materia.create');
     }
 
     /**
@@ -28,7 +29,19 @@ class MateriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'codigo' => 'required|string|unique:materias',
+            'creditos' => 'required|integer',
+        ]);
+
+        Materia::create([
+            'nombre' => $request->nombre,
+            'codigo' => $request->codigo,
+            'creditos' => $request->creditos,
+        ]);
+
+        return redirect('/materia')->with('success', 'Materia registrada exitosamente.');
     }
 
     /**
