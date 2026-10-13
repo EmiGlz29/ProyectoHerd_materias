@@ -18,7 +18,7 @@
 
         <form action="{{ route('materia.update', $materia) }}" method="POST" class="space-y-6 rounded-xl bg-white p-6 shadow-sm sm:p-8">
             @csrf
-            
+            @method('PUT')
 
             <div>
                 <label for="nombre" class="mb-2 block text-sm font-medium text-slate-700">Nombre</label>
