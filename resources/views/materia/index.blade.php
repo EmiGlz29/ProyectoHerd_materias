@@ -64,6 +64,9 @@
                                                     Eliminar
                                                 </button>
                                             </form>
+                                            <a href="{{ route('materia.show', $materia) }}" class="font-medium text-green-700 hover:text-green-900">
+                                                ver detalles
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>

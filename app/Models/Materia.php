@@ -13,5 +13,6 @@ class Materia extends Model
         'nombre',
         'codigo',
         'creditos',
+        'profesor',
     ];
 }

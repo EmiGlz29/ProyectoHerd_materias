@@ -36,12 +36,14 @@ class MateriaController extends Controller
             'nombre' => 'required|string|max:255',
             'codigo' => 'required|string|unique:materias',
             'creditos' => 'required|integer',
+            'profesor' => ['nullable', 'string', 'max:255'],
         ]);
 
         Materia::create([
             'nombre' => $request->nombre,
             'codigo' => $request->codigo,
             'creditos' => $request->creditos,
+            'profesor' => $request->profesor,
         ]);
 
         return redirect('/materia')->with('success', 'Materia registrada exitosamente.');
@@ -50,12 +52,10 @@ class MateriaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(Materia $materia): View
     {
-        $materias = Materia::query()->get(['nombre', 'codigo']);
-        return view('materia.show', compact('materias'));
+        return view('materia.show', compact('materia'));
     }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -73,6 +73,7 @@ class MateriaController extends Controller
             'nombre' => ['required', 'string', 'max:255'],
             'codigo' => ['required', 'string', 'max:255', Rule::unique('materias', 'codigo')->ignore($materia->id)],
             'creditos' => ['required', 'integer'],
+            'profesor' => ['nullable', 'string', 'max:255']
         ]);
 
         $materia->update($validatedData);
